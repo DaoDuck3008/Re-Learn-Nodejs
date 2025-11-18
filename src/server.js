@@ -4,6 +4,7 @@ import initWebRoutes from "./routes/web";
 require("dotenv").config();
 import bodyParser from "body-parser";
 import connection from "./config/connectDB";
+import methodOverride from "method-override";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -14,6 +15,10 @@ configViewEngine(app);
 //config body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//config method override
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 //test connection DB
 connection();

@@ -1,5 +1,5 @@
 import express from "express";
-import homeController from "../controller/homeController";
+import userController from "../controller/userController";
 const router = express.Router();
 
 /**
@@ -8,9 +8,13 @@ const router = express.Router();
  */
 
 const initWebRoutes = (app) => {
-  router.get("/", homeController.handleHelloWorld);
-  router.get("/user", homeController.handleUserPage);
-  router.post("/user", homeController.create);
+  router.get("/", userController.index);
+
+  router.get("/user", userController.index);
+  router.post("/user", userController.create);
+  router.delete("/user/:id", userController.destroy);
+  router.get("/user/:id", userController.edit);
+  router.put("/user/:id", userController.update);
 
   return app.use("/", router);
 };
